@@ -24,3 +24,61 @@ def is_sentence(text):
         return False
 
     return True
+
+
+def get_sentence():
+    """Prompt the user for a valid sentence and return it."""
+    while True:
+        sentence = input("Enter a sentence: ").strip()
+        if is_valid_sentence(sentence):
+            return sentence
+        else:
+            print("Invalid sentence. Make sure it starts with a capital letter and ends with '.', '?', or '!'.\n")
+
+
+def is_valid_sentence(sentence):
+    """Check if the input is a valid sentence."""
+    if len(sentence) < 2:
+        return False
+    if not sentence[0].isupper():
+        return False
+    if sentence[-1] not in ".!?":
+        return False
+    return True
+
+
+def calculate_frequencies(sentence):
+    words = []
+    frequencies = []
+    cleaned_sentence = sentence[:-1]  
+    word_list = cleaned_sentence.split()
+
+    for word in word_list:
+        word = word.lower()  
+        if word in words:
+            index = words.index(word)
+            frequencies[index] += 1
+        else:
+            words.append(word)
+            frequencies.append(1)
+
+    return words, frequencies
+
+
+def print_frequencies(words, frequencies):
+    """Print each word with its corresponding frequency."""
+    print("\nWord Frequencies:")
+    for i in range(len(words)):
+        print(f"{words[i]}: {frequencies[i]}")
+
+
+def main():
+    """Main function to control the flow of the program."""
+    sentence = get_sentence()
+    words, frequencies = calculate_frequencies(sentence)
+    print_frequencies(words, frequencies)
+
+
+if __name__ == "__main__":
+    main()
+

@@ -2,26 +2,39 @@
 
 # Fibonacci Sequence Exercise with functions
 # TODO: (Read detailed instructions in the Readme file)
-x = 0
-y = 1
 def get_user_input():
-  inp = int(input("How many terms of the fibonacci sequence do you want?"))
-  if (inp <= 0):
-    print("Enter a positive integer.")
+    while True:
+        try:
+            n = int(input("Enter how many terms of the Fibonacci sequence you want: "))
+            if n <= 0:
+                print("Please enter a positive integer.")
+            else:
+                return n
+        except ValueError:
+            print("Invalid input. Please enter a positive integer.")
 
 
-          
-def fibonacci_generator():
-  for num in range(int(inp)):  
-    x, y = y, x + y
+def generate_fibonacci(n):
+    sequence = []
+    a, b = 0, 1
+    for _ in range(n):
+        sequence.append(a)
+        a, b = b, a + b
+    return sequence
 
 
+def print_sequence(sequence):
+    print("Fibonacci sequence:")
+    print(", ".join(map(str, sequence)))
 
-def print_sequence():
-  print("Fibonacci sequence: ")
-  print(x, y)
+
+# --- Main program ---
+def main():
+    n = get_user_input()
+    sequence = generate_fibonacci(n)
+    print_sequence(sequence)
 
 
-get_user_input()
-fibonacci_generator()
-print_sequence()
+# Run the program
+if __name__ == "__main__":
+    main()

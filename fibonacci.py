@@ -12,7 +12,7 @@ def get_user_input():
 
           
 def fibonacci_generator():
-  for num in range(inp):  
+  for num in range(int(inp)):  
     x, y = y, x + y
 
 
